@@ -2,7 +2,7 @@
 
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = "https://maro-solution.onrender.com/api";
 const FALLBACK_CATEGORIES = [
   { value: 'plumber', label: 'Plumber' },
   { value: 'electrician', label: 'Electrician' },
