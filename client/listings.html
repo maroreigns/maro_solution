@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Listings - Maro Solution</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <div class="nav-container">
+
+      <h1 class="logo">Maro Solution</h1>
+
+      <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+
+        <li><a href="listings.html">Listings</a></li>
+
+        <li><a href="add.html">Add Business</a></li>
+
+      </ul>
+
+      <div class="hamburger">
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <main>
+
+    <section class="listings">
+
+      <h2>Business Listings</h2>
+
+      <div class="filters">
+
+        <select id="category-filter">
+
+          <option value="">All Categories</option>
+
+        </select>
+
+        <select id="location-filter">
+
+          <option value="">All Locations</option>
+
+        </select>
+
+        <button id="filter-btn">Filter</button>
+
+      </div>
+
+      <div id="loading" class="loading">Loading...</div>
+
+      <div id="business-list" class="business-grid"></div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <p>&copy; 2023 Maro Solution. All rights reserved.</p>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
