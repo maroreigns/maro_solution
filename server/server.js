@@ -1,13 +1,17 @@
 require('dotenv').config();
 
 const express = require('express');
-app.use(cors());
-app.use(express.json());
 const mongoose = require('mongoose');
 const cors = require('cors');
 const businessRoutes = require('./routes/businessRoutes');
 
 const app = express();
+
+// ✅ middleware comes AFTER app is created
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const PORT = process.env.PORT || 5000;
 const { MONGO_URI } = process.env;
 
