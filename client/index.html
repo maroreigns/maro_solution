@@ -1,103 +1,93 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Maro Solution - Find Trusted Services Near You</title>
-
+  <title>Maro Solution</title>
   <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
 
-  <nav class="navbar">
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
 
-    <div class="nav-container">
+    <h1 class="logo">Maro Solution</h1>
 
-      <h1 class="logo">Maro Solution</h1>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="listings.html">Listings</a></li>
+      <li><a href="add.html">Add Business</a></li>
+    </ul>
 
-      <ul class="nav-links">
-
-        <li><a href="index.html">Home</a></li>
-
-        <li><a href="listings.html">Listings</a></li>
-
-        <li><a href="add.html">Add Business</a></li>
-
-      </ul>
-
-      <div class="hamburger">
-
-        <span></span>
-
-        <span></span>
-
-        <span></span>
-
-      </div>
-
+    <!-- SMALL HAMBURGER -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
-  </nav>
+  </div>
+</nav>
 
-  <main>
+<!-- HERO -->
+<section class="hero">
 
-    <section class="hero">
+  <h2>Find Trusted Services Near You</h2>
 
-      <h2>Find Trusted Services Near You</h2>
+  <form class="search-form" action="listings.html">
 
-      <form class="search-form" action="listings.html" method="get">
+    <input type="text" placeholder="Category (e.g plumber)" name="category">
 
-        <input type="text" name="category" placeholder="Category (e.g., plumber)" required>
+    <select id="state">
+      <option value="">Select State</option>
+    </select>
 
-        <select name="location" required>
+    <select id="lga">
+      <option value="">Select LGA</option>
+    </select>
 
-          <option value="">Select Location</option>
+    <button type="submit">Search</button>
 
-          <option value="Lagos">Lagos</option>
+  </form>
 
-          <option value="Abuja">Abuja</option>
+</section>
 
-          <option value="Port Harcourt">Port Harcourt</option>
+<footer class="footer">
 
-          <option value="Ibadan">Ibadan</option>
+  <div class="footer-container">
 
-          <option value="Kano">Kano</option>
+    <!-- BRAND -->
+    <div class="footer-section">
+      <h2 class="footer-logo">Maro Solution</h2>
+      <p>Find trusted services near you easily and quickly.</p>
+    </div>
 
-          <option value="Enugu">Enugu</option>
+    <!-- CONTACT -->
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email: marosolution@gmail.com</p>
+    </div>
 
-          <option value="Benin City">Benin City</option>
+    <!-- SOCIALS -->
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <div class="social-links">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Instagram</a>
+      </div>
+    </div>
 
-          <option value="Aba">Aba</option>
+  </div>
 
-          <option value="Kaduna">Kaduna</option>
+  <div class="footer-bottom">
+    <p>© 2026 Maro Solution. All rights reserved.</p>
+  </div>
 
-          <option value="Owerri">Owerri</option>
+</footer>
 
-        </select>
-
-        <button type="submit">Search</button>
-
-      </form>
-
-    </section>
-
-  </main>
-
-  <footer>
-
-    <p>&copy; 2023 Maro Solution. All rights reserved.</p>
-
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
