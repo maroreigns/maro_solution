@@ -2,26 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-// =========================
-// MODEL
-// =========================
-const businessSchema = new mongoose.Schema({
-  name: String,
-  category: String,
-
-  // ✅ NEW FIELDS
-  state: String,
-  lga: String,
-
-  // optional fallback
-  location: String,
-
-  phone: String,
-  rating: { type: Number, default: 0 },
-  numReviews: { type: Number, default: 0 }
-});
-
-const Business = mongoose.model("Business", businessSchema);
+// ✅ IMPORT MODEL (DO NOT RECREATE IT HERE)
+const Business = require("../models/Business");
 
 // =========================
 // GET BUSINESSES
@@ -47,24 +29,22 @@ router.get('/', async (req, res) => {
 });
 
 // =========================
-// POST BUSINESS (🔥 FIXED)
+// POST BUSINESS (FIXED)
 // =========================
 router.post('/', async (req, res) => {
 
   try {
 
     const business = new Business({
-
       name: req.body.name,
       category: req.body.category,
 
-      // 🔥 THIS IS THE MAIN FIX
+      // 🔥 MAIN FIX
       state: req.body.state,
       lga: req.body.lga,
-      location: req.body.state, // fallback
+      location: req.body.state,
 
       phone: req.body.phone
-
     });
 
     const newBusiness = await business.save();

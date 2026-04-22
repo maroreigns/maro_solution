@@ -1,33 +1,28 @@
 const mongoose = require('mongoose');
-const { SERVICE_CATEGORIES } = require('../constants/categories');
-const { SERVICE_LOCATIONS } = require('../constants/locations');
 
 const businessSchema = new mongoose.Schema({
   name: { type: String, required: true },
 
   category: {
     type: String,
-    required: true,
-    enum: SERVICE_CATEGORIES.map((category) => category.value)
+    required: true
   },
 
-  // State (e.g Lagos, Abuja, Rivers)
-  location: {
-    type: String,
-    required: true,
-    enum: SERVICE_LOCATIONS.map((location) => location.label)
-  },
-
-  // NEW: State (same as location but clearer naming)
+  // ✅ STATE (MAIN LOCATION)
   state: {
     type: String,
     required: true
   },
 
-  // NEW: Local Government Area
+  // ✅ LOCAL GOVERNMENT
   lga: {
     type: String,
     required: true
+  },
+
+  // ✅ OPTIONAL (fallback only)
+  location: {
+    type: String
   },
 
   phone: { type: String, required: true },
