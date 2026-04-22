@@ -22,23 +22,21 @@ const nigeriaData = {
 const API_BASE_URL = "https://maro-solution.onrender.com/api";
 
 // =========================
-// LOAD PAGE
+// PAGE LOAD
 // =========================
 document.addEventListener("DOMContentLoaded", async () => {
 
   // =========================
-  // ACTIVE NAV
+  // NAVBAR ACTIVE + HAMBURGER
   // =========================
   const currentPage = window.location.pathname.split("/").pop();
+
   document.querySelectorAll(".nav-links a").forEach(link => {
     if (link.getAttribute("href") === currentPage) {
       link.classList.add("active");
     }
   });
 
-  // =========================
-  // HAMBURGER MENU
-  // =========================
   const hamburger = document.getElementById("hamburger");
   const navLinks = document.getElementById("nav-links");
 
@@ -69,6 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const lgaSelect = document.getElementById("lga");
 
   if (stateSelect && lgaSelect) {
+
     Object.keys(nigeriaData).forEach(state => {
       const option = document.createElement("option");
       option.value = state;
@@ -89,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // =========================
-  // ADD BUSINESS FORM
+  // ADD BUSINESS FORM (🔥 FIXED)
   // =========================
   const form = document.getElementById("add-form");
 
@@ -118,9 +117,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           })
         });
 
-        await res.json();
+        const data = await res.json();
 
-        document.getElementById("message").innerText = "✅ Business added!";
+        console.log("Saved:", data); // 🔥 DEBUG
+
+        document.getElementById("message").innerText = "✅ Business added successfully!";
         form.reset();
 
       } catch (err) {
@@ -131,7 +132,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // =========================
-  // LOAD BUSINESSES (LISTINGS PAGE)
+  // LOAD BUSINESSES
   // =========================
   const businessList = document.getElementById("business-list");
   const loading = document.getElementById("loading");
@@ -146,22 +147,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       displayBusinesses(businesses);
 
     } catch (err) {
-      if (loading) loading.innerHTML = "⚠️ Failed to load";
       console.error(err);
+      if (loading) loading.innerText = "❌ Failed to load";
     }
   }
 
 });
 
 // =========================
-// DISPLAY BUSINESSES
+// DISPLAY BUSINESSES (🔥 FIXED LOCATION)
 // =========================
 function displayBusinesses(businesses) {
+
   const businessList = document.getElementById("business-list");
-
-  if (!businessList) return;
-
   businessList.innerHTML = "";
+
+  if (businesses.length === 0) {
+    businessList.innerHTML = "<p>No businesses found</p>";
+    return;
+  }
 
   businesses.forEach(b => {
 
@@ -172,32 +176,26 @@ function displayBusinesses(businesses) {
       ? `${state} - ${lga}`
       : state || "N/A";
 
-    const image = b.image || "https://via.placeholder.com/80";
-
-    const rating = Math.round(b.rating || 0);
-    const reviews = b.numReviews || 0;
+    // 🔥 PROFILE IMAGE (fallback added)
+    const image = b.image || "https://via.placeholder.com/100";
 
     const card = document.createElement("div");
     card.className = "business-card";
 
     card.innerHTML = `
+
+      <!-- PROFILE IMAGE -->
       <div class="profile-img">
         <img src="${image}" alt="profile">
       </div>
 
       <h3>${b.name}</h3>
 
-      <!-- ⭐ STARS -->
-      <div class="stars" data-id="${b._id}">
-        ${[1,2,3,4,5].map(i => `
-          <span class="star ${i <= rating ? "active" : ""}" data-value="${i}">★</span>
-        `).join("")}
-        <small class="review-count">(${reviews})</small>
-      </div>
+      <p>⭐ ${b.rating || 0} (${b.numReviews || 0})</p>
 
       <p><strong>${b.category}</strong></p>
 
-      <p class="location">📍 ${location}</p>
+      <p>📍 ${location}</p>
 
       <p>📞 ${b.phone}</p>
 
@@ -207,46 +205,5 @@ function displayBusinesses(businesses) {
     `;
 
     businessList.appendChild(card);
-  });
-
-  // =========================
-  // STAR CLICK EVENT (SMOOTH)
-  // =========================
-  document.querySelectorAll(".star").forEach(star => {
-    star.addEventListener("click", async function () {
-
-      const value = Number(this.dataset.value);
-      const starsContainer = this.parentElement;
-      const businessId = starsContainer.dataset.id;
-
-      // ⭐ INSTANT UI UPDATE
-      const allStars = starsContainer.querySelectorAll(".star");
-
-      allStars.forEach(s => {
-        s.classList.remove("active");
-        if (Number(s.dataset.value) <= value) {
-          s.classList.add("active");
-        }
-      });
-
-      // update review count visually
-      const reviewText = starsContainer.querySelector(".review-count");
-      let current = parseInt(reviewText.textContent.replace(/\D/g, "")) || 0;
-      reviewText.textContent = `(${current + 1})`;
-
-      // 🔁 SEND TO BACKEND (silent)
-      try {
-        await fetch(`${API_BASE_URL}/businesses/${businessId}/rate`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ rating: value })
-        });
-      } catch (err) {
-        console.error("Rating failed:", err);
-      }
-
-    });
   });
 }

@@ -20,7 +20,7 @@ main {
 
 /* NAVBAR */
 .navbar {
-  background: white;
+  background: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
@@ -31,14 +31,16 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo {
   color: #007bff;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* NAV LINKS */
 .nav-links {
   display: flex;
   gap: 25px;
@@ -57,51 +59,64 @@ main {
   padding-bottom: 4px;
 }
 
-/* DESKTOP NAV */
-.nav-links {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-}
-
+/* HAMBURGER */
 .hamburger {
   display: none;
+  flex-direction: column;
+  cursor: pointer;
 }
+
+.hamburger span {
+  width: 22px;
+  height: 3px;
+  background: #333;
+  margin: 3px 0;
+}
+
 /* HERO */
 .hero {
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
 }
 
 .hero h2 {
   margin-bottom: 20px;
 }
 
-/* SEARCH */
+/* SEARCH FORM */
 .search-form {
+  max-width: 700px;
+  margin: auto;
   display: flex;
-  gap: 10px;
-  justify-content: center;
   flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
 
 .search-form input,
 .search-form select {
-  padding: 12px;
+  flex: 1 1 200px;
+  height: 45px;
+  padding: 0 12px;
   border-radius: 10px;
   border: none;
-  width: 200px;
+  font-size: 14px;
 }
 
 .search-form button {
-  padding: 12px 20px;
+  flex: 1 1 150px;
+  height: 45px;
   border-radius: 25px;
   border: none;
   background: #007bff;
   color: white;
   cursor: pointer;
+}
+
+.search-form button:hover {
+  background: #0056d2;
 }
 
 /* LISTINGS */
@@ -126,12 +141,6 @@ main {
   flex-wrap: wrap;
 }
 
-.filters select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
 /* GRID */
 .business-grid {
   display: grid;
@@ -149,21 +158,54 @@ main {
 
 .business-card h3 {
   color: #007bff;
+}
+
+/* PROFILE IMAGE */
+.profile-img {
+  text-align: center;
   margin-bottom: 10px;
 }
 
-.business-card p {
-  margin: 5px 0;
+.profile-img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-/* ADD PAGE */
+/* TEXT */
+.location {
+  color: #555;
+}
+
+.rating {
+  color: #f39c12;
+}
+
+/* WHATSAPP */
+.whatsapp-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* FORM */
+.form-page {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
 .form-container {
-  max-width: 400px;
-  margin: 40px auto;
+  max-width: 500px;
+  width: 100%;
   background: white;
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .form-container input,
@@ -181,311 +223,22 @@ main {
   background: #007bff;
   color: white;
   border: none;
-  border-radius: 8px;
-}
-
-/* ================= MOBILE NAV FIX ================= */
-@media (max-width: 768px) {
-
-  .nav-container {
-    position: relative;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    width: 220px;
-    background: white;
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
-    display: none;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .hamburger {
-    display: flex;
-    cursor: pointer;
-  }
-
-  .hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #333;
-    margin: 4px 0;
-  }
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.nav-container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.logo {
-  color: #007bff;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-/* DESKTOP MENU */
-.nav-links {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-.nav-links a.active {
-  border-bottom: 3px solid #007bff;
-  color: #007bff;
-  padding-bottom: 4px;
-}
-
-/* HAMBURGER (HIDDEN ON DESKTOP) */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  width: 30px;
-  height: 25px;
-  cursor: pointer;
+  border-radius: 20px;
 }
 
 /* PROFILE IMAGE */
 .profile-img {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-bottom: 10px;
 }
 
 .profile-img img {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 50%;   /* 🔥 makes it round */
   object-fit: cover;
-}
-
-/* FORM PAGE */
-.form-page {
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.form-container {
-  background: #fff;
-  padding: 25px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.form-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007bff;
-}
-
-/* FORM */
-.form-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* INPUTS */
-.form-container input,
-.form-container select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-/* BUTTON */
-.form-container button {
-  padding: 10px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-/* IMAGE UPLOAD */
-.image-upload {
-  text-align: center;
-}
-
-.image-upload label {
-  font-weight: bold;
-}
-
-.image-upload input {
-  margin-top: 10px;
-}
-
-/* WHATSAPP BUTTON */
-.whatsapp-btn {
-  display: inline-block;
-  margin-top: 10px;
-  background: #25D366;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-}
-
-/* LOCATION */
-.location {
-  color: #555;
-}
-
-.hamburger span {
-  width: 22px;
-  height: 3px;
-  background: #333;
-  margin: 3px 0;
-  border-radius: 2px;
-}
-
-/* RATING */
-.rating {
-  color: #f39c12;
-  font-weight: bold;
-}
-
-/* ⭐ STAR RATING UX */
-.stars {
-  display: inline-block;
-}
-
-.star {
-  font-size: 20px;
-  color: #ccc;
-  cursor: pointer; /* ✅ THIS ADDS HAND CURSOR */
-  transition: 0.2s;
-}
-
-/* ACTIVE (SELECTED) */
-.star.active {
-  color: gold;
-}
-
-/* HOVER EFFECT */
-.star:hover {
-  color: orange;
-  transform: scale(1.2); /* 🔥 nice zoom effect */
-}
-
-/* HOVER ALL LEFT STARS */
-.star:hover ~ .star {
-  color: #ccc;
-}
-
-/* LOCATION */
-.location {
-  color: #555;
-  font-size: 0.95rem;
-}
-
-/* WHATSAPP BUTTON */
-.whatsapp-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: #25D366;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-}
-
-.whatsapp-btn:hover {
-  background: #1ebe5d;
-}
-
-/* ⭐ STARS */
-.rating-stars {
-  margin: 5px 0;
-  cursor: pointer;
-}
-
-.star {
-  font-size: 18px;
-  color: #ccc;
-}
-
-.star.filled {
-  color: gold;
-}
-
-.star:hover {
-  color: orange;
-}
-
-/* LOCATION */
-.location {
-  color: #555;
-}
-
-/* WHATSAPP */
-.whatsapp-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: #25D366;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-}
-/* ===== MOBILE ===== */
-@media (max-width: 768px) {
-
-  /* HIDE NORMAL MENU */
-  .nav-links {
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    width: 180px; /* 🔥 SMALL WIDTH */
-    background: white;
-    flex-direction: column;
-    padding: 10px;
-    display: none;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-
-  /* SHOW WHEN ACTIVE */
-  .nav-links.active {
-    display: flex;
-  }
-
-  /* SHOW SMALL HAMBURGER */
-  .hamburger {
-    display: flex;
-  }
+  border: 3px solid #007bff;
 }
 
 /* FOOTER */
@@ -502,7 +255,6 @@ main {
   flex-wrap: wrap;
   max-width: 1100px;
   margin: auto;
-  gap: 20px;
 }
 
 .footer-section {
@@ -514,40 +266,64 @@ main {
   color: #007bff;
 }
 
-.footer-section h3 {
-  margin-bottom: 10px;
-}
-
-.footer-section p {
-  font-size: 14px;
-  color: #ccc;
-}
-
-/* SOCIAL LINKS */
-.social-links a {
-  display: block;
-  color: #ccc;
-  text-decoration: none;
-  margin-bottom: 5px;
-}
-
-.social-links a:hover {
-  color: #007bff;
-}
-
-/* BOTTOM */
 .footer-bottom {
   text-align: center;
   border-top: 1px solid #333;
   margin-top: 20px;
   padding-top: 10px;
-  font-size: 14px;
 }
 
-/* MOBILE */
+/* 🔥 PERFECT MOBILE FIX */
 @media (max-width: 768px) {
-  .footer-container {
+
+  .search-form {
+    display: flex;
     flex-direction: column;
-    text-align: center;
+    gap: 12px;
   }
+
+  .search-form input,
+  .search-form select {
+    width: 100%;
+    height: 45px !important;
+    padding: 0 12px !important;
+    border-radius: 10px;
+    flex: unset !important;   /* 🔥 THIS FIXES THE BIG BOX */
+  }
+
+  .search-form button {
+    width: 100%;
+    height: 45px !important;
+    flex: unset !important;   /* 🔥 IMPORTANT */
+  }
+
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+
+  /* HIDE NORMAL MENU */
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 180px;
+    background: white;
+    flex-direction: column;
+    padding: 10px;
+    display: none;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  /* SHOW WHEN CLICKED */
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* SHOW HAMBURGER */
+  .hamburger {
+    display: flex;
+  }
+
 }

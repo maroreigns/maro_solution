@@ -1,93 +1,87 @@
-const express = require('express');
-const mongoose = require('mongoose');
-
+const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
-const Business = require('../models/Business');
-const { SERVICE_CATEGORIES, normalizeCategory } = require('../constants/categories');
-const { SERVICE_LOCATIONS, normalizeLocation } = require('../constants/locations');
+// =========================
+// MODEL
+// =========================
+const businessSchema = new mongoose.Schema({
+  name: String,
+  category: String,
 
-router.get('/categories', (req, res) => {
-  res.json(SERVICE_CATEGORIES);
+  // ✅ NEW FIELDS
+  state: String,
+  lga: String,
+
+  // optional fallback
+  location: String,
+
+  phone: String,
+  rating: { type: Number, default: 0 },
+  numReviews: { type: Number, default: 0 }
 });
 
-router.get('/locations', (req, res) => {
-  res.json(SERVICE_LOCATIONS);
-});
+const Business = mongoose.model("Business", businessSchema);
 
-// GET /api/businesses - Get all businesses, with optional filters
-
+// =========================
+// GET BUSINESSES
+// =========================
 router.get('/', async (req, res) => {
-
   try {
 
-    const { category, location } = req.query;
+    const { category, state, lga } = req.query;
 
     let query = {};
 
-    if (category) {
-      const normalizedCategory = normalizeCategory(category);
-      query.category = normalizedCategory ? normalizedCategory.value : new RegExp(category, 'i');
-    }
-
-    if (location) {
-      const normalizedLocation = normalizeLocation(location);
-      query.location = normalizedLocation ? normalizedLocation.label : new RegExp(location, 'i');
-    }
+    if (category) query.category = category;
+    if (state) query.state = state;
+    if (lga) query.lga = lga;
 
     const businesses = await Business.find(query);
 
     res.json(businesses);
 
   } catch (error) {
-
     res.status(500).json({ message: error.message });
-
   }
-
 });
 
-// POST /api/businesses - Add a business
-
+// =========================
+// POST BUSINESS (🔥 FIXED)
+// =========================
 router.post('/', async (req, res) => {
-  const normalizedCategory = normalizeCategory(req.body.category);
-  const normalizedLocation = normalizeLocation(req.body.location);
-
-  if (!normalizedCategory) {
-    return res.status(400).json({ message: 'Invalid category selected.' });
-  }
-
-  if (!normalizedLocation) {
-    return res.status(400).json({ message: 'Invalid location selected.' });
-  }
-
-  const business = new Business({
-
-    name: req.body.name,
-
-    category: normalizedCategory.value,
-
-    location: normalizedLocation.label,
-
-    phone: req.body.phone
-
-  });
 
   try {
+
+    const business = new Business({
+
+      name: req.body.name,
+      category: req.body.category,
+
+      // 🔥 THIS IS THE MAIN FIX
+      state: req.body.state,
+      lga: req.body.lga,
+      location: req.body.state, // fallback
+
+      phone: req.body.phone
+
+    });
 
     const newBusiness = await business.save();
 
     res.status(201).json(newBusiness);
 
   } catch (error) {
-
     res.status(400).json({ message: error.message });
-
   }
 
 });
 
+// =========================
+// ADD REVIEW
+// =========================
 router.post('/:id/review', async (req, res) => {
+
   const { id } = req.params;
   const parsedRating = Number(req.body.rating);
 
@@ -100,6 +94,7 @@ router.post('/:id/review', async (req, res) => {
   }
 
   try {
+
     const business = await Business.findById(id);
 
     if (!business) {
@@ -114,9 +109,11 @@ router.post('/:id/review', async (req, res) => {
     const updatedBusiness = await business.save();
 
     res.json(updatedBusiness);
+
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+
 });
 
 module.exports = router;
